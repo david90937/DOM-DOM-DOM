@@ -30,27 +30,25 @@ document = document.addEventListener("DOMContentLoaded", function(){
             colText.remove();
         })
         col.addEventListener("dblclick", function(){
+            let cellArray = document.getElementsByClassName("col-4");
+            let idArray = [];
+            for (let i = 0; i < cellArray.length; i++) {
+                idArray.push(parseInt(cellArray[i].id, 10));
+                console.log(idArray)
+            }
             if ((event.target.id % 2) == 0) {
-                let beingRemoved = document.getElementById((divIds[event.target.id] + numClicks));
-                numClicks += 1;
+                let beingRemoved = document.getElementById(idArray[event.target.id]);
                 if (beingRemoved == null) {
                     alert("There is no valid square to remove");
-                    numClicks = 0;
                 }
                 else {
                     beingRemoved.remove();
                 }
             }
-
-            else if ((event.target.id % 2) != 0) {
-                numClicks = 1;
-                let beingRemoved = document.getElementById((divIds[event.target.id -1] - numClicks));
-                console.log(beingRemoved);
-                numClicks += 1;
-                console.log(numClicks);
+            if ((event.target.id % 2) != 0) {
+                let beingRemoved = document.getElementById(idArray[(event.target.id - 0)]);
                 if (beingRemoved == null) {
                     alert("There is no valid square to remove");
-                    numClicks = 0;
                 }
                 else {
                     beingRemoved.remove();
@@ -99,3 +97,28 @@ function getRandom(event){
 //         }
 //     }
 // })
+
+// if ((event.target.id % 2) == 0) {
+//     let beingRemoved = document.getElementById((divIds[event.target.id] + numClicks));
+//     numClicks += 1;
+//     if (beingRemoved == null) {
+//         alert("There is no valid square to remove");
+//         numClicks = 0;
+//     }
+//     else {
+//         beingRemoved.remove();
+//     }
+// }
+
+// else if ((event.target.id % 2) != 0) {
+//     numClicks = 1;
+//     let beingRemoved = document.getElementById((divIds[event.target.id -1] - numClicks));
+//     numClicks += 1;
+//     if (beingRemoved == null) {
+//         alert("There is no valid square to remove");
+//         numClicks = 0;
+//     }
+//     else {
+//         beingRemoved.remove();
+//     }
+// }
