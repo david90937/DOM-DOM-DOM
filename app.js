@@ -6,7 +6,6 @@ document = document.addEventListener("DOMContentLoaded", function(){
     let div = document.createElement('div');
     let squareNum = 0;
     let divIds = [];
-    let numClicks = 0;
 
     container.className = "container";
     div.className = "row";
@@ -30,14 +29,8 @@ document = document.addEventListener("DOMContentLoaded", function(){
             colText.remove();
         })
         col.addEventListener("dblclick", function(){
-            let cellArray = document.getElementsByClassName("col-4");
-            let idArray = [];
-            for (let i = 0; i < cellArray.length; i++) {
-                idArray.push(parseInt(cellArray[i].id, 10));
-                console.log(idArray)
-            }
             if ((event.target.id % 2) == 0) {
-                let beingRemoved = document.getElementById(idArray[event.target.id]);
+                let beingRemoved = document.getElementById(event.target.id).nextSibling;
                 if (beingRemoved == null) {
                     alert("There is no valid square to remove");
                 }
@@ -46,14 +39,14 @@ document = document.addEventListener("DOMContentLoaded", function(){
                 }
             }
             if ((event.target.id % 2) != 0) {
-                let beingRemoved = document.getElementById(idArray[(event.target.id - 0)]);
-                if (beingRemoved == null) {
-                    alert("There is no valid square to remove");
+                    let beingRemoved = document.getElementById(event.target.id).previousSibling;
+                    if (beingRemoved == null) {
+                        alert("There is no valid square to remove");
+                    }
+                    else {
+                        beingRemoved.remove();
+                    }
                 }
-                else {
-                    beingRemoved.remove();
-                }
-            }
         })
         col.addEventListener("click", getRandom)
         div.appendChild(col);
@@ -71,54 +64,3 @@ function getRandom(event){
     let randomColor = Math.floor(Math.random() * (max - min) + min);
     event.target.style.color = colors[randomColor];
  }
-
-
-
-//  col.addEventListener("dblclick", function(){
-//     let beingRemoved = [];
-//     if ((event.target.id % 2) == 0) {
-//         for (let i = 0; i < divIds.length; i++) {
-//             if (divIds[i] > col.id){
-//                 beingRemoved.push(divIds[i]);
-//             }
-//         }
-//         for (let x = 0; x < beingRemoved.length; x++) {
-//             let removedElement = document.getElementById(beingRemoved[x]);
-//             if (removedElement != null){
-//                 removedElement.remove();
-//             }
-//             else if (removedElement == null) {
-//                 alert("There is no valid square to remove");
-//                 return;
-//             }
-//         }
-//         if (beingRemoved != "") {
-//             beingRemoved.shift();
-//         }
-//     }
-// })
-
-// if ((event.target.id % 2) == 0) {
-//     let beingRemoved = document.getElementById((divIds[event.target.id] + numClicks));
-//     numClicks += 1;
-//     if (beingRemoved == null) {
-//         alert("There is no valid square to remove");
-//         numClicks = 0;
-//     }
-//     else {
-//         beingRemoved.remove();
-//     }
-// }
-
-// else if ((event.target.id % 2) != 0) {
-//     numClicks = 1;
-//     let beingRemoved = document.getElementById((divIds[event.target.id -1] - numClicks));
-//     numClicks += 1;
-//     if (beingRemoved == null) {
-//         alert("There is no valid square to remove");
-//         numClicks = 0;
-//     }
-//     else {
-//         beingRemoved.remove();
-//     }
-// }
