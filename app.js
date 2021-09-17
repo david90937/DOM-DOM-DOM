@@ -5,7 +5,6 @@ document = document.addEventListener("DOMContentLoaded", function(){
     let container = document.createElement("div");
     let div = document.createElement('div');
     let squareNum = 0;
-    let divIds = [];
 
     container.className = "container";
     div.className = "row";
@@ -17,7 +16,6 @@ document = document.addEventListener("DOMContentLoaded", function(){
         col.style.background = "black";
         col.style.height = "3em";
         col.id = squareNum;
-        divIds.push(parseInt(col.id, 10));
         let colText = document.createTextNode(col.id);
 
         col.addEventListener("mouseover", function(){
